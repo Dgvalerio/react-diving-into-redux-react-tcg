@@ -1,11 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const initialState = { counter: 0, showCounter: true };
-
 const counterSlice = createSlice({
   name: 'counter',
-  initialState,
+  initialState: { counter: 0, showCounter: true },
   reducers: {
     increment(state) {
       state.counter += 1;
@@ -22,9 +20,24 @@ const counterSlice = createSlice({
   },
 });
 
+const authSlice = createSlice({
+  name: 'authentication',
+  initialState: { isAuthenticated: false },
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = true;
+    },
+  },
+});
+
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
 });
 
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
+
 export default store;
